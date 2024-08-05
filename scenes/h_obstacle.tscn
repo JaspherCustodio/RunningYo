@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://bt3rn5jcgyrh0"]
+
+[ext_resource type="Texture2D" uid="uid://dic5ubhqjx4tx" path="res://assets/obstacles/Asset 20.png" id="1_367su"]
+[ext_resource type="Texture2D" uid="uid://dw2t7p7yi1xq2" path="res://assets/obstacles/Asset 21.png" id="2_c8u47"]
+[ext_resource type="Texture2D" uid="uid://cp57687y83mqg" path="res://assets/obstacles/Asset 22.png" id="3_rkik6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cnt5h"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("1_367su")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_c8u47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_c8u47")
+}, {
+"duration": 5.0,
+"texture": ExtResource("3_rkik6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_c8u47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_c8u47")
+}],
+"loop": true,
+"name": &"anim",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4y3e"]
+size = Vector2(56, 196)
+
+[node name="HObstacle" type="Area2D"]
+rotation = 1.5708
+collision_layer = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(58.5004, -0.000211771)
+sprite_frames = SubResource("SpriteFrames_cnt5h")
+animation = &"anim"
+autoplay = "anim"
+frame_progress = 0.814655
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(58.5004, -0.000211771)
+shape = SubResource("RectangleShape2D_v4y3e")

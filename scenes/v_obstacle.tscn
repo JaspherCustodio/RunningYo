@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://ct7kh1wsmo8or"]
+
+[ext_resource type="Texture2D" uid="uid://dw2t7p7yi1xq2" path="res://assets/obstacles/Asset 21.png" id="1_p4en4"]
+[ext_resource type="Texture2D" uid="uid://dic5ubhqjx4tx" path="res://assets/obstacles/Asset 20.png" id="1_xihfs"]
+[ext_resource type="Texture2D" uid="uid://cp57687y83mqg" path="res://assets/obstacles/Asset 22.png" id="3_ax6fv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cnt5h"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("1_xihfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_p4en4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_p4en4")
+}, {
+"duration": 5.0,
+"texture": ExtResource("3_ax6fv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_p4en4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_p4en4")
+}],
+"loop": true,
+"name": &"anim",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4y3e"]
+size = Vector2(56, 196)
+
+[node name="VObstacle" type="Area2D"]
+collision_layer = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cnt5h")
+animation = &"anim"
+autoplay = "anim"
+frame_progress = 0.566078
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v4y3e")

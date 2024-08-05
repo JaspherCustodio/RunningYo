@@ -1,0 +1,153 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3fe8jviyaeeu"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_ujkja"]
+[ext_resource type="FontFile" uid="uid://dovl88s32u4ax" path="res://assets/font/joystix monospace.otf" id="1_uo3cy"]
+[ext_resource type="PackedScene" uid="uid://6sb2adg1gr80" path="res://scenes/fade.tscn" id="2_uhh23"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxbk8"]
+bg_color = Color(0, 0, 0, 1)
+draw_center = false
+border_width_left = 95
+border_width_right = 95
+border_color = Color(0.137255, 0.137255, 0.137255, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_ujkja")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27451)
+
+[node name="Fade" parent="." instance=ExtResource("2_uhh23")]
+
+[node name="ScoreLabel" type="Label" parent="."]
+visible = false
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 79.0
+offset_bottom = 59.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 24
+text = "0M
+"
+
+[node name="GameReady" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -377.0
+offset_top = -103.0
+offset_right = 377.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ReadyLabel" type="Label" parent="GameReady"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 70
+text = "YO GET READY!
+"
+
+[node name="GameOver" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -142.0
+offset_right = 290.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="Label" parent="GameOver"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 70
+text = "Game OVER!"
+horizontal_alignment = 1
+
+[node name="HighScoreLabel" type="Label" parent="GameOver"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 40
+text = "HIGH SCORE:"
+horizontal_alignment = 1
+
+[node name="ScoredLabel" type="Label" parent="GameOver"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 40
+text = "SCORE:"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="GameOver"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pxbk8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOver/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.5
+offset_top = -28.0
+offset_right = 188.5
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Restart" type="Button" parent="GameOver/Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(0.976471, 0.929412, 0.0666667, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 40
+text = "Restart
+"
+
+[node name="Quit" type="Button" parent="GameOver/Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 40
+text = "Quit
+"
+
+[connection signal="pressed" from="GameOver/Panel/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GameOver/Panel/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
