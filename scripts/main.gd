@@ -82,6 +82,7 @@ func _process(_delta):
 		
 		player.position.x += speed
 		camera.position.x += speed
+		Music.position.x += speed
 		
 		#update score
 		hud.get_node("ScoreLabel").show()

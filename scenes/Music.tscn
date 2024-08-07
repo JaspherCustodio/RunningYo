@@ -4,7 +4,6 @@
 
 [node name="Music" type="AudioStreamPlayer2D"]
 autoplay = true
-max_distance = 9.22337e+18
 bus = &"Music"
 area_mask = 0
 script = ExtResource("1_7vmhr")
