@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3fe8jviyaeeu"]
+[gd_scene load_steps=6 format=3 uid="uid://d3fe8jviyaeeu"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_ujkja"]
 [ext_resource type="FontFile" uid="uid://dovl88s32u4ax" path="res://assets/font/joystix monospace.otf" id="1_uo3cy"]
 [ext_resource type="PackedScene" uid="uid://6sb2adg1gr80" path="res://scenes/fade.tscn" id="2_uhh23"]
+[ext_resource type="Texture2D" uid="uid://7g0eglco7lsv" path="res://assets/bg/Asset 46.png" id="4_wg71h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxbk8"]
 bg_color = Color(0, 0, 0, 1)
@@ -43,6 +44,7 @@ text = "0M
 "
 
 [node name="GameReady" type="VBoxContainer" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -65,7 +67,6 @@ text = "YO GET READY!
 "
 
 [node name="GameOver" type="VBoxContainer" parent="."]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -149,5 +150,98 @@ theme_override_font_sizes/font_size = 40
 text = "Quit
 "
 
+[node name="Settings" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="MarginContainer" type="MarginContainer" parent="Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 256
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="GridContainer" type="GridContainer" parent="Settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 16
+columns = 2
+
+[node name="MusicLabel" type="Label" parent="Settings/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/font_size = 29
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="Settings/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXLabel" type="Label" parent="Settings/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/font_size = 29
+text = "SFX
+"
+
+[node name="SFXSlider" type="HSlider" parent="Settings/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SettingsButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 467.0
+offset_top = 140.0
+offset_right = 547.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+button_mask = 2
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="SettingsButton"]
+position = Vector2(40, 41)
+texture = ExtResource("4_wg71h")
+
 [connection signal="pressed" from="GameOver/Panel/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="GameOver/Panel/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="Settings/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="Settings/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

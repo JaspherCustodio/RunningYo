@@ -68,6 +68,7 @@ func new_game():
 	
 	#reset hud
 	hud.get_node("GameReady").show()
+	hud.get_node("SettingsButton").show()
 	hud.get_node("GameOver").hide()
 
 func _process(_delta):
@@ -99,6 +100,8 @@ func _process(_delta):
 				remove_obs(obs)
 		
 		hud.get_node("GameReady").hide()
+		hud.get_node("SettingsButton").hide()
+		
 
 func generate_obs():
 	if obstacles.is_empty() or last_obs.position.x < score + randi_range(400, 700):
@@ -161,6 +164,7 @@ func game_over():
 	check_high_score()
 	hud.get_node("ScoreLabel").hide()
 	hud.get_node("GameOver").show()
+	hud.get_node("SettingsButton").show()
 	hud.on_game_over(score / SCORE_MODIFIER, Global.high_score / SCORE_MODIFIER)
 
 func save_high_score():

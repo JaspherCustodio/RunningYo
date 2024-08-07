@@ -7,7 +7,13 @@ class_name UI
 @onready var fade = $Fade as Fade
 @onready var color_rect = $ColorRect
 @onready var score_label = $ScoreLabel
+@onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
+@onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
+@onready var settings = $Settings
 
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		settings.visible = !settings.visible
 
 func scored(score):
 	score_label.text = format_number_with_commas(score) + "M"
@@ -39,3 +45,16 @@ func _on_restart_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+func _on_music_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(value))
+	AudioServer.set_bus_mute(MUSIC_BUS_ID, value < 0.5)
+
+func _on_sfx_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(SFX_BUS_ID, linear_to_db(value))
+	AudioServer.set_bus_mute(SFX_BUS_ID, value < 0.5)
+
+func _on_settings_button_pressed():
+	settings.visible = !settings.visible
+	if settings.visible == true:
+		return
