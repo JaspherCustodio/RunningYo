@@ -12,7 +12,7 @@ class_name UI
 func scored(score):
 	score_label.text = format_number_with_commas(score) + "M"
 
-func on_game_over(score, high_score ):
+func on_game_over(score, high_score):
 	if fade != null: 
 		fade.play()
 	color_rect.visible = true

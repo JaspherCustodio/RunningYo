@@ -15,7 +15,7 @@ run/main_scene="res://scenes/intro.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 0)
 boot_splash/show_image=false
-config/icon="res://icon.svg"
+config/icon="res://Asset 45.png"
 
 [audio]
 
@@ -28,7 +28,6 @@ Global="*res://scripts/Global.gd"
 
 [display]
 
-window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [input]

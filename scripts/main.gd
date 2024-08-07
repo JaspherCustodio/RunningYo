@@ -15,10 +15,10 @@ var last_obs
 const PLAYER_START_POS := Vector2i(242, 424)
 const CAM_START_POS := Vector2i(576, 324)
 
-const START_SPEED: float = 10.0
+const START_SPEED = 10
 const MAX_SPEED: int = 25
 const SPEED_MODIFIER: int = 5000
-var speed: float
+var speed: int
 
 const MAX_DIFFICULTY: int = 2
 var difficulty
