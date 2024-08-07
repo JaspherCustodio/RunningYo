@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bl4saoirmy65m"]
+[gd_scene load_steps=9 format=3 uid="uid://bl4saoirmy65m"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_qf3ko"]
 [ext_resource type="PackedScene" uid="uid://dbtaja262e8eg" path="res://scenes/background.tscn" id="2_klewm"]
@@ -9,14 +9,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpise"]
 size = Vector2(1152, 31)
-
-[sub_resource type="Curve" id="Curve_51d2g"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.475104, 1), 0.0, 0.0, 0, 0, Vector2(0.962655, 0.763545), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="Gradient" id="Gradient_jbt56"]
-offsets = PackedFloat32Array(0.15859, 0.447137, 0.755507, 0.931718, 1)
-colors = PackedColorArray(0, 0, 1, 0.392157, 0.113725, 0.352941, 1, 0.392157, 0.913725, 0.913725, 1, 0.588235, 1, 1, 1, 0.678431, 1, 1, 1, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gg3v2"]
 bg_color = Color(0.976471, 0.929412, 0.0666667, 1)
@@ -38,30 +30,17 @@ script = ExtResource("1_qf3ko")
 position = Vector2(576, 324)
 script = ExtResource("5_co3lh")
 
-[node name="Ground" parent="Camera2D" instance=ExtResource("5_uhr0y")]
-position = Vector2(-576, -324)
+[node name="Timer" type="Timer" parent="Camera2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Camera2D/Ground"]
-position = Vector2(576, 324)
+[node name="Heaven" type="StaticBody2D" parent="Camera2D"]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Ground/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Heaven"]
 position = Vector2(0, -339.5)
 shape = SubResource("RectangleShape2D_xpise")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Camera2D"]
-z_index = 6
-position = Vector2(800, -500)
-amount = 200
-lifetime = 1.5
-lifetime_randomness = 0.51
-emission_shape = 3
-emission_rect_extents = Vector2(1500, 1)
-gravity = Vector2(-200, 980)
-scale_amount_min = 2.0
-scale_amount_max = 4.0
-scale_amount_curve = SubResource("Curve_51d2g")
-color_ramp = SubResource("Gradient_jbt56")
+[node name="Ground" parent="Camera2D" instance=ExtResource("5_uhr0y")]
+position = Vector2(-576, -324)
 
 [node name="ProgressBar" type="ProgressBar" parent="Camera2D"]
 unique_name_in_owner = true
@@ -75,10 +54,5 @@ max_value = 10.0
 step = 1.0
 value = 10.0
 show_percentage = false
-
-[node name="Timer" type="Timer" parent="Camera2D"]
-
-[node name="GameStart" type="AudioStreamPlayer2D" parent="."]
-bus = &"SoundEffects"
 
 [connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_timer_timeout"]

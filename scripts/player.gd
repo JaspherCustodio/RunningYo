@@ -31,7 +31,6 @@ func _physics_process(delta):
 			is_started = true
 		jump()
 	elif !is_started:
-		Music.play_music_global()
 		return
 	elif is_on_floor():
 		animation_player.play("run")

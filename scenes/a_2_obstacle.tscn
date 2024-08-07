@@ -35,7 +35,7 @@ size = Vector2(56, 196)
 
 [node name="A2Obstacle" type="Area2D"]
 rotation = 0.785398
-collision_layer = 2
+collision_layer = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cnt5h")
