@@ -9,7 +9,7 @@ class_name UI
 @onready var score_label = $ScoreLabel
 
 
-func score(score):
+func scored(score):
 	score_label.text = format_number_with_commas(score) + "M"
 
 func on_game_over(score, high_score ):

@@ -5,8 +5,7 @@ extends Area2D
 @onready var sprite_2d = $Sprite2D
 @onready var collision_shape = $CollisionShape2D
 @onready var ignite = $Ignite
-@onready var exploding = $Exploding
-@onready var moving_r = $MovingR
+@onready var exploding = preload("res://assets/music&sound/mixkit-arcade-game-explosion-2759.mp3")
 @onready var warn = $Warn
 
 
@@ -15,7 +14,7 @@ func _process(_delta):
 	animation_player.play("moving")
 
 func _on_body_entered(_body):
-	exploding.play()
+	Music.play_FX(exploding, 0)
 	sprite_2d.hide()
 	warn.playing = false
 	explode.emitting = true

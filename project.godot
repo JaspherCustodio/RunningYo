@@ -12,13 +12,13 @@ config_version=5
 
 config/name="Run Yo"
 run/main_scene="res://scenes/intro.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://scripts/Global.gd"
 Music="*res://scenes/Music.tscn"
+Global="*res://scripts/Global.gd"
 
 [display]
 

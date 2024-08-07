@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bl4saoirmy65m"]
+[gd_scene load_steps=11 format=3 uid="uid://bl4saoirmy65m"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_qf3ko"]
 [ext_resource type="PackedScene" uid="uid://dbtaja262e8eg" path="res://scenes/background.tscn" id="2_klewm"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://b614yu7buwqix" path="res://scenes/player.tscn" id="5_2o6n1"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="5_co3lh"]
 [ext_resource type="PackedScene" uid="uid://cd6b461vj0740" path="res://scenes/ground.tscn" id="5_uhr0y"]
-[ext_resource type="AudioStream" uid="uid://c2iq866sx7ure" path="res://assets/music&sound/game-start-6104.mp3" id="7_r4324"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpise"]
 size = Vector2(1152, 31)
@@ -80,6 +79,6 @@ show_percentage = false
 [node name="Timer" type="Timer" parent="Camera2D"]
 
 [node name="GameStart" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_r4324")
+bus = &"SoundEffects"
 
 [connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_timer_timeout"]

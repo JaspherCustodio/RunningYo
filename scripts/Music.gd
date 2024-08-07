@@ -11,4 +11,15 @@ func play_music(music: AudioStream, volume = 0.0):
 
 func play_music_global():
 	play_music(global_music)
+
+func play_FX(stream: AudioStream, volume = 0.0):
+	var fx_play = AudioStreamPlayer.new()
+	fx_play.stream = stream
+	fx_play.name = "FX_PLAYER"
+	fx_play.volume_db = volume
+	add_child(fx_play)
+	fx_play.play()
 	
+	await fx_play.finished
+	
+	fx_play.queue_free()

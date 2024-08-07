@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://scripts/Music.gd" id="1_7vmhr"]
 
 [node name="Music" type="AudioStreamPlayer2D"]
+autoplay = true
 script = ExtResource("1_7vmhr")

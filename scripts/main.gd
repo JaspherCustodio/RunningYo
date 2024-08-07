@@ -45,11 +45,11 @@ var health: = 10:
 @onready var camera = $Camera2D
 @onready var hud = $HUD as UI
 #sound effects
-@onready var game_start: AudioStreamPlayer2D = $GameStart
+@onready var game_start = preload("res://assets/music&sound/game-start-6104.mp3")
 
 
 func _ready():
-	game_start.play()
+	Music.play_FX(game_start, 0)
 	screen_size = get_window().size
 	new_game()
 
@@ -70,7 +70,7 @@ func new_game():
 	hud.get_node("GameOver").hide()
 
 func _process(_delta):
-	if player.is_started == true:
+	if player.is_started:
 		speed = START_SPEED + score / SPEED_MODIFIER
 		if speed > MAX_SPEED:
 			speed = MAX_SPEED
@@ -134,7 +134,7 @@ func hit_obs(body):
 			body.kill()
 
 func show_score():
-	hud.score(score / SCORE_MODIFIER)
+	hud.scored(score / SCORE_MODIFIER)
 
 func check_high_score():
 	if score > Global.high_score:
