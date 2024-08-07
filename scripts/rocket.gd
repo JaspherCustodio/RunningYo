@@ -14,7 +14,7 @@ func _process(_delta):
 	animation_player.play("moving")
 
 func _on_body_entered(_body):
-	Music.play_FX(exploding, 0)
+	Music.play_FX(exploding, -3)
 	sprite_2d.hide()
 	warn.playing = false
 	explode.emitting = true

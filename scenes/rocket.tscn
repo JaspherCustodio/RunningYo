@@ -211,6 +211,7 @@ bus = &"SFX"
 area_mask = 0
 
 [node name="MovinR" type="AudioStreamPlayer2D" parent="."]
+volume_db = -7.0
 bus = &"SFX"
 area_mask = 0
 

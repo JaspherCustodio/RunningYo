@@ -48,7 +48,7 @@ func jump():
 	idle_ignite.emitting = false
 
 func apply_damage():
-	Music.play_FX(damage_fx, 0)
+	Music.play_FX(damage_fx, -5)
 	var tween = get_tree().create_tween()
 	tween.tween_method(set_shader_blink_intensity, 1.0, 0.0, 0.5)
 

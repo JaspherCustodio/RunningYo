@@ -54,7 +54,6 @@ func _ready():
 	new_game()
 
 func new_game():
-	Music.play_music_global()
 	difficulty = 0
 	#delete all obstacle
 	for obs in obstacles:
@@ -65,6 +64,7 @@ func new_game():
 	player.position = PLAYER_START_POS
 	player.velocity = Vector2i(0, 0)
 	camera.position = CAM_START_POS
+	Music.position = CAM_START_POS
 	
 	#reset hud
 	hud.get_node("GameReady").show()
