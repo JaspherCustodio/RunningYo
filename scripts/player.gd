@@ -24,7 +24,6 @@ func _ready():
 	idle_ignite.emitting = true
 
 func _physics_process(delta):
-	Music.play_music_global()
 	# Handle jump.
 	if Input.is_action_pressed("jump") && should_process_input:
 		if !is_started:
@@ -32,6 +31,7 @@ func _physics_process(delta):
 			is_started = true
 		jump()
 	elif !is_started:
+		Music.play_music_global()
 		return
 	elif is_on_floor():
 		animation_player.play("run")

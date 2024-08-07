@@ -54,6 +54,7 @@ func _ready():
 	new_game()
 
 func new_game():
+	Music.play_music_global()
 	difficulty = 0
 	#delete all obstacle
 	for obs in obstacles:
