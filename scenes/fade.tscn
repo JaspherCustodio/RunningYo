@@ -24,7 +24,6 @@ _data = {
 }
 
 [node name="Fade" type="Node"]
-process_mode = 3
 script = ExtResource("1_rjdud")
 
 [node name="ColorRect" type="ColorRect" parent="."]

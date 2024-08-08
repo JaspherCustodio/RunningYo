@@ -198,6 +198,7 @@ libraries = {
 autoplay = "moving"
 
 [node name="Explosion" type="CPUParticles2D" parent="."]
+process_mode = 3
 z_index = 5
 position = Vector2(0, -46)
 emitting = false
