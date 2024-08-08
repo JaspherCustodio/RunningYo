@@ -7,7 +7,6 @@ var GRAVITY: int = 4200
 var is_started: bool = false
 var should_process_input: bool = true
 
-@onready var damage_fx = preload("res://assets/music&sound/textures-impact-137826.mp3")
 @onready var explode = $Explosion
 @onready var ignite = $Ignite
 @onready var idle_ignite = $IdleIgnite
@@ -15,6 +14,7 @@ var should_process_input: bool = true
 @onready var sprite_2d = $Sprite2D
 @onready var collision_shape = $CollisionShape2D
 @onready var running_flying: AudioStreamPlayer2D = $Running_Flying
+@onready var damage: AudioStreamPlayer2D = $Damage
 
 
 func _ready():
@@ -48,7 +48,7 @@ func jump():
 	idle_ignite.emitting = false
 
 func apply_damage():
-	Music.play_FX(damage_fx, -5)
+	damage.play()
 	var tween = get_tree().create_tween()
 	tween.tween_method(set_shader_blink_intensity, 1.0, 0.0, 0.5)
 

@@ -9,11 +9,11 @@ class_name UI
 @onready var score_label = $ScoreLabel
 @onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
 @onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
-@onready var settings = $Settings
+@onready var settings_menu = $SettingsMenu
+@onready var settings_button = $SettingsButton
+@onready var pause_menu = $PauseMenu
+@onready var animation_player = $AnimationPlayer
 
-func _input(event):
-	if event.is_action_pressed("ui_cancel"):
-		settings.visible = !settings.visible
 
 func scored(score):
 	score_label.text = format_number_with_commas(score) + "M"
@@ -40,6 +40,14 @@ func format_number_with_commas(number: int) -> String:
 	
 	return formatted_str
 
+func _on_pause_pressed() -> void:
+	get_tree().paused = true
+	#animation_player.play("pause_blur")
+
+func _on_resume_pressed() -> void:
+	get_tree().paused = false
+	#animation_player.play_backwards("pause_blur")
+
 func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
 
@@ -55,6 +63,13 @@ func _on_sfx_slider_value_changed(value):
 	AudioServer.set_bus_mute(SFX_BUS_ID, value < 0.5)
 
 func _on_settings_button_pressed():
-	settings.visible = !settings.visible
-	if settings.visible == true:
-		return
+	settings_menu.visible = !settings_menu.visible
+	#settings_menu.grab_focus()
+
+func _on_pause_button_pressed():
+	pause_menu.visible = !pause_menu.visible
+	if pause_menu.visible:
+		_on_pause_pressed()
+	elif !pause_menu.visible:
+		_on_resume_pressed()
+

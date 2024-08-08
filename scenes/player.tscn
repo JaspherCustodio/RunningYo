@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b614yu7buwqix"]
+[gd_scene load_steps=25 format=3 uid="uid://b614yu7buwqix"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_o3dmp"]
 [ext_resource type="Shader" path="res://scripts/blink.gdshader" id="2_drot0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dwwco46caqgfk" path="res://assets/player_sprite/Asset 28.png" id="5_cfrts"]
 [ext_resource type="Texture2D" uid="uid://cjs1hej4c3r4c" path="res://assets/player_sprite/Asset 27.png" id="6_ngqkl"]
 [ext_resource type="Texture2D" uid="uid://qjtqpu7e23t0" path="res://assets/player_sprite/Asset 26.png" id="7_8vmcv"]
+[ext_resource type="AudioStream" uid="uid://b5n8euwgrdy24" path="res://assets/music&sound/textures-impact-137826.mp3" id="8_kct7a"]
 [ext_resource type="Texture2D" uid="uid://b3s0v7ra2inwl" path="res://assets/player_sprite/Asset 25.png" id="8_lxgbn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_maqje"]
@@ -211,10 +212,10 @@ scale = Vector2(0.8, 0.8)
 shape = SubResource("CapsuleShape2D_cl43h")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_dtwrh")
 }
+autoplay = "idle"
 
 [node name="Explosion" type="CPUParticles2D" parent="."]
 z_index = 5
@@ -280,3 +281,8 @@ area_mask = 0
 volume_db = -5.0
 bus = &"SFX"
 area_mask = 0
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_kct7a")
+volume_db = -5.0
+bus = &"SFX"

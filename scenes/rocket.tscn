@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://drmkaa6c88dfg"]
+[gd_scene load_steps=14 format=3 uid="uid://drmkaa6c88dfg"]
 
 [ext_resource type="Texture2D" uid="uid://2ef52oksg0n3" path="res://assets/obstacles/Asset 19.png" id="1_6ybod"]
 [ext_resource type="Script" path="res://scripts/rocket.gd" id="1_nwoeo"]
 [ext_resource type="AudioStream" uid="uid://btjiipwaegrb3" path="res://assets/music&sound/mixkit-space-rocket-full-power-turbine-1720.mp3" id="3_optmi"]
+[ext_resource type="AudioStream" uid="uid://dmheg4ckup55b" path="res://assets/music&sound/mixkit-arcade-game-explosion-2759.mp3" id="4_83ygf"]
+[ext_resource type="AudioStream" uid="uid://dbed4aq3rd0ht" path="res://assets/music&sound/3TRKFS4-arcade-chomper.mp3" id="4_tdx0j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14uwv"]
 radius = 19.0
@@ -126,6 +128,33 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/4/use_blend = true
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Warn")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_tdx0j")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/5/use_blend = true
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Warn:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5cxqh"]
 _data = {
@@ -163,10 +192,10 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_14uwv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "moving"
 libraries = {
 "": SubResource("AnimationLibrary_5cxqh")
 }
+autoplay = "moving"
 
 [node name="Explosion" type="CPUParticles2D" parent="."]
 z_index = 5
@@ -214,5 +243,9 @@ area_mask = 0
 volume_db = -7.0
 bus = &"SFX"
 area_mask = 0
+
+[node name="Exploding" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_83ygf")
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

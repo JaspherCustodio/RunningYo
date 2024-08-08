@@ -45,11 +45,11 @@ var health: = 10:
 @onready var camera = $Camera2D
 @onready var hud = $HUD as UI
 #sound effects
-@onready var game_start = preload("res://assets/music&sound/game-start-6104.mp3")
+@onready var game_start:AudioStreamPlayer2D = $GameStart
 
 
 func _ready():
-	Music.play_FX(game_start, 0)
+	game_start.play()
 	screen_size = get_window().size
 	new_game()
 
@@ -100,8 +100,7 @@ func _process(_delta):
 				remove_obs(obs)
 		
 		hud.get_node("GameReady").hide()
-		hud.get_node("SettingsButton").hide()
-		
+
 
 func generate_obs():
 	if obstacles.is_empty() or last_obs.position.x < score + randi_range(400, 700):
