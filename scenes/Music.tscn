@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/Music.gd" id="1_7vmhr"]
 
 [node name="Music" type="AudioStreamPlayer2D"]
+process_mode = 3
 autoplay = true
 bus = &"Music"
 area_mask = 0

@@ -1,19 +1,20 @@
 extends CanvasLayer
 class_name UI
 
-@onready var game_over = $GameOver
-@onready var high_score_label = $GameOver/HighScoreLabel
-@onready var scored_label = $GameOver/ScoredLabel
+@onready var high_score_label = $GameOverMenu/GameOver/HighScoreLabel
+@onready var scored_label = $GameOverMenu/GameOver/ScoredLabel
 @onready var fade = $Fade as Fade
-@onready var color_rect = $ColorRect
 @onready var score_label = $ScoreLabel
 @onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
 @onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
 @onready var settings_menu = $SettingsMenu
-@onready var settings_button = $SettingsButton
+@onready var settings_button = $GameReadyMenu/SettingsButton
 @onready var pause_menu = $PauseMenu
+@onready var pause_button = $PauseButton
 @onready var animation_player = $AnimationPlayer
 
+func _ready():
+	animation_player.play("RESET")
 
 func scored(score):
 	score_label.text = format_number_with_commas(score) + "M"
@@ -21,11 +22,12 @@ func scored(score):
 func on_game_over(score, high_score):
 	if fade != null: 
 		fade.play()
-	color_rect.visible = true
+	pause_button.hide()
+	get_tree().paused = true
+	animation_player.play("blur")
 	scored_label.text = "SCORE: " + format_number_with_commas(score) + "M"
 	high_score_label.text = "HIGH SCORE: " + format_number_with_commas(high_score) + "M"
-	game_over.visible = true
-	$GameOver/Panel/HBoxContainer/Restart.grab_focus()
+	$GameOverMenu/GameOver/HBoxContainer/Restart.grab_focus()
 
 func format_number_with_commas(number: int) -> String:
 	var number_str = str(number)
@@ -42,13 +44,18 @@ func format_number_with_commas(number: int) -> String:
 
 func _on_pause_pressed() -> void:
 	get_tree().paused = true
-	#animation_player.play("pause_blur")
+	pause_button.hide()
+	animation_player.play("blur")
+	pause_menu.show()
 
 func _on_resume_pressed() -> void:
+	pause_button.show()
+	pause_menu.hide()
 	get_tree().paused = false
-	#animation_player.play_backwards("pause_blur")
+	animation_player.play_backwards("blur")
 
 func _on_restart_pressed() -> void:
+	_on_resume_pressed()
 	get_tree().reload_current_scene()
 
 func _on_quit_pressed() -> void:
@@ -63,13 +70,20 @@ func _on_sfx_slider_value_changed(value):
 	AudioServer.set_bus_mute(SFX_BUS_ID, value < 0.5)
 
 func _on_settings_button_pressed():
-	settings_menu.visible = !settings_menu.visible
-	#settings_menu.grab_focus()
+	if settings_button.pressed:
+		settings_menu.show()
+		settings_button.hide()
+		$SettingsMenu/MarginContainer/VBoxContainer/GridContainer/MusicSlider.grab_focus()
 
 func _on_pause_button_pressed():
-	pause_menu.visible = !pause_menu.visible
-	if pause_menu.visible:
+	if pause_button.pressed and !get_tree().paused:
 		_on_pause_pressed()
-	elif !pause_menu.visible:
+	elif pause_button.pressed and get_tree().paused:
 		_on_resume_pressed()
 
+func _on_back_button_pressed():
+	settings_menu.hide()
+	settings_button.show()
+
+func _process(delta):
+	_on_back_button_pressed()

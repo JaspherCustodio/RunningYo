@@ -21,11 +21,11 @@ corner_radius_bottom_left = 10
 [node name="Main" type="Node"]
 script = ExtResource("1_qf3ko")
 
-[node name="HUD" parent="." instance=ExtResource("2_ugend")]
-
 [node name="Background" parent="." instance=ExtResource("2_klewm")]
 
 [node name="Player" parent="." instance=ExtResource("5_2o6n1")]
+
+[node name="HUD" parent="." instance=ExtResource("2_ugend")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)

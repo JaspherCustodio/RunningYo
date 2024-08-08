@@ -67,9 +67,8 @@ func new_game():
 	Music.position = CAM_START_POS
 	
 	#reset hud
-	hud.get_node("GameReady").show()
-	hud.get_node("SettingsButton").show()
-	hud.get_node("GameOver").hide()
+	hud.get_node("GameReadyMenu").show()
+	hud.get_node("GameOverMenu").hide()
 
 func _process(_delta):
 	if player.is_started:
@@ -99,7 +98,9 @@ func _process(_delta):
 			if obs.position.x < (camera.position.x - screen_size.x):
 				remove_obs(obs)
 		
-		hud.get_node("GameReady").hide()
+		hud.get_node("GameReadyMenu").hide()
+		hud.get_node("PauseButton").show()
+		hud.get_node("SettingsMenu").hide()
 
 
 func generate_obs():
@@ -162,8 +163,7 @@ func adjust_difficulty():
 func game_over():
 	check_high_score()
 	hud.get_node("ScoreLabel").hide()
-	hud.get_node("GameOver").show()
-	hud.get_node("SettingsButton").show()
+	hud.get_node("GameOverMenu").show()
 	hud.on_game_over(score / SCORE_MODIFIER, Global.high_score / SCORE_MODIFIER)
 
 func save_high_score():

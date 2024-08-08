@@ -38,6 +38,7 @@ rotation = 1.5708
 collision_layer = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+process_mode = 3
 position = Vector2(58.5004, -0.000211771)
 sprite_frames = SubResource("SpriteFrames_cnt5h")
 animation = &"anim"
