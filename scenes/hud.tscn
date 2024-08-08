@@ -174,7 +174,6 @@ icon_alignment = 1
 [node name="SettingsButton" type="Button" parent="PauseMenu/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-action_mode = 0
 icon = ExtResource("4_wg71h")
 icon_alignment = 1
 
@@ -325,7 +324,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-action_mode = 0
 icon = ExtResource("4_wg71h")
 
 [node name="SettingsMenu" type="Control" parent="."]
@@ -451,11 +449,9 @@ libraries = {
 [connection signal="pressed" from="PauseMenu/VBoxContainer/ResumeButton" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="PauseMenu/VBoxContainer/HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="GameOverMenu/GameOver/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="GameOverMenu/GameOver/HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="GameOverMenu/GameOver/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="GameReadyMenu/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="SettingsMenu/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
