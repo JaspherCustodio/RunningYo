@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://d3fe8jviyaeeu"]
+[gd_scene load_steps=20 format=3 uid="uid://d3fe8jviyaeeu"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_ujkja"]
 [ext_resource type="FontFile" uid="uid://dovl88s32u4ax" path="res://assets/font/joystix monospace.otf" id="1_uo3cy"]
 [ext_resource type="PackedScene" uid="uid://6sb2adg1gr80" path="res://scenes/fade.tscn" id="2_uhh23"]
-[ext_resource type="Texture2D" uid="uid://7g0eglco7lsv" path="res://assets/bg/Asset 46.png" id="4_wg71h"]
 [ext_resource type="Shader" path="res://scripts/blur.gdshader" id="5_80r33"]
 [ext_resource type="Texture2D" uid="uid://ccms3tgwqk21i" path="res://assets/bg/Asset 48.png" id="6_y214v"]
 [ext_resource type="Texture2D" uid="uid://buxv121huyn1o" path="res://assets/bg/Asset 47.png" id="7_cc40r"]
@@ -21,6 +20,12 @@ load_path = "res://.godot/imported/Asset 46.png-5b5d5d51ff7f5ae4d905a727377c5a97
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ilf0a"]
 bg_color = Color(0.929412, 0.133333, 0.141176, 0.0666667)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdtwx"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dpqw5"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_3wups"]
 length = 0.001
@@ -89,13 +94,13 @@ tracks/0/keys = {
 "values": [0.0, 0.9]
 }
 
-[sub_resource type="Animation" id="Animation_njw0a"]
-resource_name = "pause_fade"
+[sub_resource type="Animation" id="Animation_e8q1v"]
+resource_name = "game_over_fade"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PauseMenu:modulate")
+tracks/0/path = NodePath("GameOverMenu:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -105,13 +110,13 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_e8q1v"]
-resource_name = "game_over_fade"
+[sub_resource type="Animation" id="Animation_njw0a"]
+resource_name = "pause_fade"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GameOverMenu:modulate")
+tracks/0/path = NodePath("PauseMenu:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -165,14 +170,13 @@ text = "0M
 "
 
 [node name="ColorRect" type="ColorRect" parent="."]
-process_mode = 3
 material = SubResource("ShaderMaterial_udkox")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.27451)
+color = Color(0, 0, 0, 1)
 
 [node name="PauseButton" type="Button" parent="."]
 visible = false
@@ -181,15 +185,10 @@ offset_left = 1048.0
 offset_top = 24.0
 offset_right = 1130.0
 offset_bottom = 104.0
-
-[node name="Sprite2D" type="Sprite2D" parent="PauseButton"]
-visible = false
-position = Vector2(40.5, 40)
-texture = ExtResource("6_y214v")
-
-[node name="Sprite2D2" type="Sprite2D" parent="PauseButton"]
-position = Vector2(40.5, 40)
-texture = ExtResource("7_cc40r")
+theme_override_colors/icon_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(1, 0, 0, 1)
+icon = ExtResource("6_y214v")
+icon_alignment = 1
 
 [node name="PauseMenu" type="Control" parent="."]
 process_mode = 3
@@ -203,7 +202,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="PauseMenu"]
-custom_minimum_size = Vector2(230, 230)
+custom_minimum_size = Vector2(330, 310)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -231,15 +230,55 @@ theme_override_constants/separation = 7
 
 [node name="ResumeButton" type="Button" parent="PauseMenu/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 13
 theme_override_fonts/font = ExtResource("1_uo3cy")
 theme_override_font_sizes/font_size = 40
 action_mode = 0
 text = "Resume"
+icon = ExtResource("7_cc40r")
+
+[node name="RestartButton" type="Button" parent="PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 40
+action_mode = 0
+text = "restart
+"
+icon = ExtResource("7_j1rgt")
+
+[node name="SettingsButton" type="Button" parent="PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(82, 80)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 40
+action_mode = 0
+text = "options"
+icon = SubResource("CompressedTexture2D_4pi2a")
 
 [node name="QuitButton" type="Button" parent="PauseMenu/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.890196, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 13
 theme_override_fonts/font = ExtResource("1_uo3cy")
@@ -247,29 +286,6 @@ theme_override_font_sizes/font_size = 40
 action_mode = 0
 text = "Quit
 "
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="RestartButton" type="Button" parent="PauseMenu/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_uo3cy")
-theme_override_font_sizes/font_size = 40
-action_mode = 0
-icon = ExtResource("7_j1rgt")
-icon_alignment = 1
-
-[node name="SettingsButton" type="Button" parent="PauseMenu/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-action_mode = 0
-icon = SubResource("CompressedTexture2D_4pi2a")
-icon_alignment = 1
 
 [node name="GameOverMenu" type="Control" parent="."]
 process_mode = 3
@@ -345,33 +361,50 @@ size_flags_horizontal = 4
 [node name="Restart" type="Button" parent="GameOverMenu/GameOver/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
-theme_override_colors/font_focus_color = Color(0.976471, 0.929412, 0.0666667, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 11
+theme_override_colors/icon_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 13
 theme_override_fonts/font = ExtResource("1_uo3cy")
 theme_override_font_sizes/font_size = 40
+text = "restart
+"
 icon = ExtResource("7_j1rgt")
-icon_alignment = 1
-
-[node name="SettingsButton" type="Button" parent="GameOverMenu/GameOver/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-action_mode = 0
-icon = ExtResource("4_wg71h")
-icon_alignment = 1
 
 [node name="Quit" type="Button" parent="GameOverMenu/GameOver/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(1, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 11
+theme_override_constants/outline_size = 13
 theme_override_fonts/font = ExtResource("1_uo3cy")
 theme_override_font_sizes/font_size = 40
 text = "Quit
 "
+
+[node name="SettingsButton" type="Button" parent="GameOverMenu"]
+custom_minimum_size = Vector2(82, 80)
+layout_mode = 0
+offset_left = 808.0
+offset_top = 488.0
+offset_right = 1125.0
+offset_bottom = 568.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 40
+action_mode = 0
+text = "options"
+icon = SubResource("CompressedTexture2D_4pi2a")
 
 [node name="GameReadyMenu" type="Control" parent="."]
 visible = false
@@ -410,17 +443,25 @@ vertical_alignment = 1
 [node name="SettingsButton" type="Button" parent="GameReadyMenu"]
 custom_minimum_size = Vector2(82, 80)
 layout_mode = 2
-offset_left = 1000.0
-offset_top = 456.0
-offset_right = 1082.0
-offset_bottom = 536.0
+offset_left = 808.0
+offset_top = 488.0
+offset_right = 1125.0
+offset_bottom = 568.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 40
 action_mode = 0
+text = "options"
 icon = SubResource("CompressedTexture2D_4pi2a")
-icon_alignment = 1
 
 [node name="SettingsMenu" type="Control" parent="."]
 process_mode = 3
@@ -480,6 +521,7 @@ text = "Music"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_pdtwx")
 max_value = 1.0
 step = 0.05
 value = 1.0
@@ -497,6 +539,7 @@ text = "SFX
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_dpqw5")
 max_value = 1.0
 step = 0.05
 value = 1.0
@@ -512,6 +555,8 @@ custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 13
 theme_override_fonts/font = ExtResource("1_uo3cy")
@@ -524,6 +569,8 @@ custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 13
 theme_override_fonts/font = ExtResource("1_uo3cy")
@@ -534,18 +581,19 @@ text = "Quit
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
+reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_6pe3w")
 }
 
 [connection signal="pressed" from="PauseButton" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/RestartButton" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="PauseMenu/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="PauseMenu/VBoxContainer/HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="GameOverMenu/GameOver/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="GameOverMenu/GameOver/HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="GameOverMenu/GameOver/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="GameOverMenu/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="GameReadyMenu/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]

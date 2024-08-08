@@ -19,6 +19,7 @@ var should_process_input: bool = true
 
 func _ready():
 	velocity = Vector2.ZERO
+	set_shader_blink_intensity(0.0)
 	animation_player.play("idle")
 	ignite.emitting = false
 	idle_ignite.emitting = true

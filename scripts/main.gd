@@ -163,7 +163,6 @@ func adjust_difficulty():
 func game_over():
 	check_high_score()
 	hud.get_node("ScoreLabel").hide()
-	hud.get_node("GameOverMenu").show()
 	hud.on_game_over(score / SCORE_MODIFIER, Global.high_score / SCORE_MODIFIER)
 
 func save_high_score():
