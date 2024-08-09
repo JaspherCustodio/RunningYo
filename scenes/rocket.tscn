@@ -10,6 +10,22 @@
 radius = 19.0
 height = 70.0
 
+[sub_resource type="Curve" id="Curve_08q75"]
+_data = [Vector2(0, 0.865583), 0.0, 0.0, 0, 0, Vector2(0.169675, 1), 0.0, 0.0, 0, 0, Vector2(0.451264, 0.471935), 0.0, 0.0, 0, 0, Vector2(0.942238, 0.0878878), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_wv4u6"]
+offsets = PackedFloat32Array(0, 0.0200803, 0.0321285, 0.0481928, 0.0963855, 0.2249, 0.365462, 0.514056, 0.863454, 0.967871, 1)
+colors = PackedColorArray(0.929412, 0.133333, 0.141176, 1, 0.976925, 0.941143, 0.0443214, 1, 1, 1, 1, 1, 0.959619, 0.897001, 0.0775625, 1, 0.954459, 0.44086, 0.0910816, 1, 0.929412, 0.133333, 0.141176, 1, 0.929412, 0.133333, 0.141176, 1, 0.993057, 0.0131148, 0.0138862, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_gi587"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.673267, 0.784972), 0.0, 0.0, 0, 0, Vector2(0.955445, 0.182892), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_q037x"]
+offsets = PackedFloat32Array(0, 0.0264317, 0.513216, 0.599119, 0.674009, 0.920705, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 0.054902, 0.262745, 0.929412, 0.133333, 0.141176, 0.678431, 1, 0, 0, 0.678431, 1, 0.458824, 0, 0.678431, 0.839216, 0, 0, 0.678431, 0, 0, 0, 0)
+
 [sub_resource type="Animation" id="Animation_o5tpc"]
 length = 0.001
 tracks/0/type = "value"
@@ -162,22 +178,6 @@ _data = {
 "moving": SubResource("Animation_wo0yx")
 }
 
-[sub_resource type="Curve" id="Curve_08q75"]
-_data = [Vector2(0, 0.865583), 0.0, 0.0, 0, 0, Vector2(0.169675, 1), 0.0, 0.0, 0, 0, Vector2(0.451264, 0.471935), 0.0, 0.0, 0, 0, Vector2(0.942238, 0.0878878), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="Gradient" id="Gradient_wv4u6"]
-offsets = PackedFloat32Array(0, 0.0200803, 0.0321285, 0.0481928, 0.0963855, 0.2249, 0.365462, 0.514056, 0.863454, 0.967871, 1)
-colors = PackedColorArray(0.929412, 0.133333, 0.141176, 1, 0.976925, 0.941143, 0.0443214, 1, 1, 1, 1, 1, 0.959619, 0.897001, 0.0775625, 1, 0.954459, 0.44086, 0.0910816, 1, 0.929412, 0.133333, 0.141176, 1, 0.929412, 0.133333, 0.141176, 1, 0.993057, 0.0131148, 0.0138862, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-
-[sub_resource type="Curve" id="Curve_gi587"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.673267, 0.784972), 0.0, 0.0, 0, 0, Vector2(0.955445, 0.182892), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_q037x"]
-offsets = PackedFloat32Array(0, 0.0264317, 0.513216, 0.599119, 0.674009, 0.920705, 1)
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 0.054902, 0.262745, 0.929412, 0.133333, 0.141176, 0.678431, 1, 0, 0, 0.678431, 1, 0.458824, 0, 0.678431, 0.839216, 0, 0, 0.678431, 0, 0, 0, 0)
-
 [node name="Rocket" type="Area2D"]
 collision_layer = 4
 script = ExtResource("1_nwoeo")
@@ -190,12 +190,6 @@ texture = ExtResource("1_6ybod")
 position = Vector2(0, -22.5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_14uwv")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_5cxqh")
-}
-autoplay = "moving"
 
 [node name="Explosion" type="CPUParticles2D" parent="."]
 process_mode = 3
@@ -249,5 +243,11 @@ area_mask = 0
 [node name="Exploding" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_83ygf")
 bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5cxqh")
+}
+autoplay = "moving"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

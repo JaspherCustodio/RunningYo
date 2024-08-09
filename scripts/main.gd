@@ -10,27 +10,25 @@ var obstacle_types := [a_obstacle, a2_obstacle, h_obstacle, v_obstacle]
 var obstacles: Array
 var obstacle_height := [120, 450, 300]
 var last_obs
-
 #game variables
 const PLAYER_START_POS := Vector2i(242, 424)
 const CAM_START_POS := Vector2i(576, 324)
-
+#speed
 const START_SPEED = 10
 const MAX_SPEED: int = 25
 const SPEED_MODIFIER: int = 5000
 var speed: int
-
+#difficulty
 const MAX_DIFFICULTY: int = 2
 var difficulty
-
+#screen size
 var screen_size: Vector2i
-
+#savepath
 const SAVE_FILE_PATH = "user://savedata.save"
-
 #score variables
 const SCORE_MODIFIER: int = 10
 var score: int = 0
-
+#health
 var health: = 10:
 	set(value):
 		health = value
@@ -38,12 +36,11 @@ var health: = 10:
 		if value <= 0:
 			progress_bar.visible = false
 			game_over()
-
 @onready var progress_bar = %ProgressBar
-#@onready var ground = $Ground
+#node
 @onready var player = $Player as Player
-@onready var camera = $Camera2D
 @onready var hud = $HUD as UI
+@onready var camera = $Camera2D
 #sound effects
 @onready var game_start:AudioStreamPlayer2D = $GameStart
 
@@ -89,6 +86,7 @@ func _process(_delta):
 		score += speed
 		show_score()
 		
+		#@onready var ground = $Ground
 		#update ground position
 		#if camera.position.x - ground.position.x > screen_size.x * 1.5:
 			#ground.position.x += screen_size.x
@@ -102,6 +100,10 @@ func _process(_delta):
 		hud.get_node("PauseButton").show()
 		hud.get_node("SettingsMenu").hide()
 
+func adjust_difficulty():
+	difficulty = score / SPEED_MODIFIER
+	if difficulty > MAX_DIFFICULTY:
+		difficulty = MAX_DIFFICULTY
 
 func generate_obs():
 	if obstacles.is_empty() or last_obs.position.x < score + randi_range(400, 700):
@@ -130,6 +132,14 @@ func add_obs(obs, x, y):
 	add_child(obs)
 	obstacles.append(obs)
 
+func remove_obs(obs):
+	obs.queue_free()
+	obstacles.erase(obs)
+
+func take_damage():
+	health -= 1
+	Global.camera.shake(0.2, 5)
+
 func hit_obs(body):
 	if body.name == "Player":
 		progress_bar.visible = true
@@ -147,24 +157,6 @@ func check_high_score():
 		hud.on_game_over(score, Global.high_score)
 		save_high_score()
 
-func take_damage():
-	health -= 1
-	Global.camera.shake(0.2, 5)
-
-func remove_obs(obs):
-	obs.queue_free()
-	obstacles.erase(obs)
-
-func adjust_difficulty():
-	difficulty = score / SPEED_MODIFIER
-	if difficulty > MAX_DIFFICULTY:
-		difficulty = MAX_DIFFICULTY
-
-func game_over():
-	check_high_score()
-	hud.get_node("ScoreLabel").hide()
-	hud.on_game_over(score / SCORE_MODIFIER, Global.high_score / SCORE_MODIFIER)
-
 func save_high_score():
 	var save_data = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE_READ)
 	save_data.store_32(Global.high_score)
@@ -173,3 +165,8 @@ func load_highscore():
 	var save_data = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
 	if FileAccess.file_exists(SAVE_FILE_PATH):
 		Global.high_score = save_data.get_32()
+
+func game_over():
+	check_high_score()
+	hud.get_node("ScoreLabel").hide()
+	hud.on_game_over(score / SCORE_MODIFIER, Global.high_score / SCORE_MODIFIER)

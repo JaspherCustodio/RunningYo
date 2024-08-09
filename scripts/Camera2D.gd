@@ -4,7 +4,7 @@ var shake_amount: float = 0
 var default_offset: Vector2 = offset
 var pos_x: int
 var pos_y: int
-
+#timer
 @onready var timer = $Timer
 
 

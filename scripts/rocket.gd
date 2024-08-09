@@ -1,12 +1,16 @@
 extends Area2D
 
-@onready var animation_player = $AnimationPlayer
-@onready var explode = $Explosion
+#node
 @onready var sprite_2d = $Sprite2D
 @onready var collision_shape = $CollisionShape2D
+#particles
+@onready var explode = $Explosion
 @onready var ignite = $Ignite
+#audiostream
 @onready var exploding: AudioStreamPlayer2D = $Exploding
 @onready var warn: AudioStreamPlayer2D = $Warn
+#anim
+@onready var animation_player = $AnimationPlayer
 
 
 func _process(_delta):
@@ -14,9 +18,9 @@ func _process(_delta):
 	animation_player.play("moving")
 
 func _on_body_entered(_body):
-	exploding.play()
+	collision_shape.set_deferred("disabled", collision_shape)
 	sprite_2d.hide()
 	warn.playing = false
-	explode.emitting = true
 	ignite.emitting = false
-	collision_shape.set_deferred("disabled", collision_shape)
+	explode.emitting = true
+	exploding.play()
