@@ -48,8 +48,6 @@ func _on_pause_pressed() -> void:
 	animation_player.play("pause_fade")
 	await(get_tree().create_timer(0.3).timeout)
 	pause_menu.show()
-	if pause_button.pressed and Input.is_action_pressed("grab_focus"):
-		resume_pause_button.grab_focus()
 	animation_player.play("blur")
 	await(get_tree().create_timer(0.3).timeout)
 
@@ -78,7 +76,6 @@ func _on_pause_button_pressed():
 func _on_settings_button_pressed():
 	settings_menu.show()
 	animation_player.play("settings_fade")
-	#music_slider.grab_focus()
 
 func _on_back_button_pressed():
 	animation_player.play_backwards("settings_fade")
@@ -106,5 +103,4 @@ func on_game_over(score, high_score):
 	game_over_menu.show()
 	scored_label.text = "SCORE: " + format_number_with_commas(score) + "M"
 	high_score_label.text = "HIGH SCORE: " + format_number_with_commas(high_score) + "M"
-	#restart_game_over_button.grab_focus()
 	get_tree().paused = true
