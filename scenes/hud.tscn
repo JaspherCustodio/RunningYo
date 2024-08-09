@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d3fe8jviyaeeu"]
+[gd_scene load_steps=21 format=3 uid="uid://d3fe8jviyaeeu"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_ujkja"]
 [ext_resource type="FontFile" uid="uid://dovl88s32u4ax" path="res://assets/font/joystix monospace.otf" id="1_uo3cy"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ccms3tgwqk21i" path="res://assets/bg/Asset 48.png" id="6_y214v"]
 [ext_resource type="Texture2D" uid="uid://buxv121huyn1o" path="res://assets/bg/Asset 47.png" id="7_cc40r"]
 [ext_resource type="Texture2D" uid="uid://bwqh4ftyjxrq6" path="res://assets/bg/Asset 49.png" id="7_j1rgt"]
+[ext_resource type="Texture2D" uid="uid://ceaa0egpgrv76" path="res://assets/bg/Asset 50.png" id="8_qkahc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_udkox"]
 shader = ExtResource("5_80r33")
@@ -154,8 +155,6 @@ _data = {
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ujkja")
 
-[node name="Fade" parent="." instance=ExtResource("2_uhh23")]
-
 [node name="ScoreLabel" type="Label" parent="."]
 visible = false
 offset_left = 9.0
@@ -178,17 +177,28 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="Fade" parent="." instance=ExtResource("2_uhh23")]
+
 [node name="PauseButton" type="Button" parent="."]
+process_mode = 3
 visible = false
 custom_minimum_size = Vector2(82, 80)
-offset_left = 1048.0
-offset_top = 24.0
-offset_right = 1130.0
-offset_bottom = 104.0
+offset_left = 1056.0
+offset_top = 16.0
+offset_right = 1138.0
+offset_bottom = 96.0
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(1, 0, 0, 1)
 theme_override_colors/icon_focus_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = ExtResource("1_uo3cy")
+theme_override_font_sizes/font_size = 40
+action_mode = 0
 icon = ExtResource("6_y214v")
 icon_alignment = 1
+expand_icon = true
 
 [node name="PauseMenu" type="Control" parent="."]
 process_mode = 3
@@ -289,8 +299,6 @@ text = "Quit
 
 [node name="GameOverMenu" type="Control" parent="."]
 process_mode = 3
-visible = false
-modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -299,7 +307,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="GameOverMenu"]
-custom_minimum_size = Vector2(600, 300)
+custom_minimum_size = Vector2(600, 380)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -354,11 +362,16 @@ theme_override_font_sizes/font_size = 40
 text = "SCORE:"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GameOverMenu/GameOver"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverMenu/GameOver"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 8
 
-[node name="Restart" type="Button" parent="GameOverMenu/GameOver/HBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="GameOverMenu/GameOver/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Restart" type="Button" parent="GameOverMenu/GameOver/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
@@ -372,7 +385,7 @@ text = "restart
 "
 icon = ExtResource("7_j1rgt")
 
-[node name="Quit" type="Button" parent="GameOverMenu/GameOver/HBoxContainer"]
+[node name="Quit" type="Button" parent="GameOverMenu/GameOver/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(1, 0, 0, 1)
@@ -383,15 +396,13 @@ theme_override_font_sizes/font_size = 40
 text = "Quit
 "
 
-[node name="SettingsButton" type="Button" parent="GameOverMenu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOverMenu/GameOver/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SettingsButton" type="Button" parent="GameOverMenu/GameOver/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(82, 80)
-layout_mode = 0
-offset_left = 808.0
-offset_top = 488.0
-offset_right = 1125.0
-offset_bottom = 568.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
@@ -442,6 +453,8 @@ vertical_alignment = 1
 
 [node name="SettingsMenu" type="Control" parent="."]
 process_mode = 3
+visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -469,7 +482,7 @@ theme_override_constants/margin_left = 256
 theme_override_constants/margin_right = 256
 
 [node name="Panel" type="Panel" parent="SettingsMenu/MarginContainer"]
-custom_minimum_size = Vector2(300, 170)
+custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
 size_flags_vertical = 4
 
@@ -538,6 +551,7 @@ theme_override_fonts/font = ExtResource("1_uo3cy")
 theme_override_font_sizes/font_size = 40
 action_mode = 0
 text = "Back"
+icon = ExtResource("8_qkahc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
@@ -551,9 +565,9 @@ libraries = {
 [connection signal="pressed" from="PauseMenu/VBoxContainer/RestartButton" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="GameOverMenu/GameOver/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="GameOverMenu/GameOver/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="GameOverMenu/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="GameOverMenu/GameOver/VBoxContainer/GridContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GameOverMenu/GameOver/VBoxContainer/GridContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="GameOverMenu/GameOver/VBoxContainer/HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="SettingsMenu/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="SettingsMenu/MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

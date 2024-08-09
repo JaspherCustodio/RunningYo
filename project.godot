@@ -28,6 +28,7 @@ Global="*res://scripts/Global.gd"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [input]
@@ -47,7 +48,10 @@ jump={
 
 [input_devices]
 
+compatibility/legacy_just_pressed_behavior=true
+buffering/agile_event_flushing=true
 pointing/emulate_touch_from_mouse=true
+pointing/android/enable_long_press_as_right_click=true
 
 [layer_names]
 
